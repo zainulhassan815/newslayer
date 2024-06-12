@@ -27,18 +27,17 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import org.dreamerslab.newslayer.common.resources.R as CommonResources
 import org.dreamerslab.newslayer.ui.components.SelectableChip
 import org.dreamerslab.newslayer.ui.theme.spacing
-import org.dreamerslab.newslayer.common.resources.R as CommonResources
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ConfigScreen(
     onNavigateUp: () -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     Scaffold(
         modifier = modifier,
@@ -51,26 +50,26 @@ fun ConfigScreen(
                     IconButton(onNavigateUp) {
                         Icon(
                             painter = painterResource(CommonResources.drawable.arrow_back),
-                            contentDescription = "Navigate Up"
+                            contentDescription = "Navigate Up",
                         )
                     }
-                }
+                },
             )
-        }
+        },
     ) { paddingValues ->
         Column(
-            modifier = Modifier.padding(paddingValues)
+            modifier = Modifier.padding(paddingValues),
         ) {
             InfoBanner(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(MaterialTheme.spacing.large)
+                    .padding(MaterialTheme.spacing.large),
             )
 
             CategorySelectionSection(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(MaterialTheme.spacing.large)
+                    .padding(MaterialTheme.spacing.large),
             )
         }
     }
@@ -78,7 +77,7 @@ fun ConfigScreen(
 
 @Composable
 private fun InfoBanner(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     Box(
         modifier = modifier,
@@ -92,11 +91,11 @@ private fun InfoBanner(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(
                 MaterialTheme.spacing.small,
-                Alignment.CenterHorizontally
+                Alignment.CenterHorizontally,
             ),
         ) {
             CompositionLocalProvider(
-                LocalContentColor provides MaterialTheme.colorScheme.onSurface
+                LocalContentColor provides MaterialTheme.colorScheme.onSurface,
             ) {
                 Icon(
                     painter = painterResource(CommonResources.drawable.info),
@@ -116,7 +115,7 @@ private fun InfoBanner(
 @Immutable
 private data class Category(
     val name: String,
-    val selected: Boolean
+    val selected: Boolean,
 )
 
 @OptIn(ExperimentalLayoutApi::class)
@@ -126,10 +125,10 @@ private fun CategorySelectionSection(
 ) {
     Box(
         modifier = modifier,
-        contentAlignment = Alignment.Center
+        contentAlignment = Alignment.Center,
     ) {
         Column(
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier.fillMaxWidth(),
         ) {
             Text(
                 text = "Select Categories",
@@ -160,7 +159,7 @@ private fun CategorySelectionSection(
                     Category("Food", false),
                     Category("LifeStyle", false),
                     Category("Entertainment", false),
-                    Category("World", false)
+                    Category("World", false),
                 )
             }
 
@@ -179,7 +178,7 @@ private fun CategorySelectionSection(
                                 painter = painterResource(CommonResources.drawable.check),
                                 contentDescription = null,
                             )
-                        }
+                        },
                     )
                 }
             }

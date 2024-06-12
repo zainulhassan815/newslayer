@@ -19,10 +19,10 @@ internal fun Project.configureKotlinAndroid(
     commonExtension: CommonExtension<*, *, *, *, *, *>,
 ) {
     commonExtension.apply {
-        compileSdk = 34
+        compileSdk = Versions.COMPILE_SDK
 
         defaultConfig {
-            minSdk = 21
+            minSdk = Versions.MIN_SDK
         }
 
         compileOptions {

@@ -9,11 +9,8 @@ espressoCore = "3.5.1"
 lifecycleRuntimeKtx = "2.8.2"
 activityCompose = "1.9.0"
 composeBom = "2024.06.00"
-ktlint = "1.3.0"
-
-compileSdkVersion = "34"
-targetSdkVersion = "34"
-minSdkVersion = "24"
+ktlint = "1.0.1"
+spotless = "6.25.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -26,6 +23,8 @@ androidx-lifecycle-runtime-ktx = { group = "androidx.lifecycle", name = "lifecyc
 androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activityCompose" }
 
 androidx-compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "composeBom" }
+androidx-compose-foundation = { group = "androidx.compose.foundation", name = "foundation" }
+androidx-compose-foundation-layout = { group = "androidx.compose.foundation", name = "foundation-layout" }
 androidx-ui = { group = "androidx.compose.ui", name = "ui" }
 androidx-ui-graphics = { group = "androidx.compose.ui", name = "ui-graphics" }
 androidx-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
@@ -41,6 +40,7 @@ android-gradlePlugin = { group = "com.android.tools.build", name = "gradle", ver
 android-tools-common = { group = "com.android.tools", name = "common", version.ref = "androidTools" }
 compose-gradlePlugin = { module = "org.jetbrains.kotlin:compose-compiler-gradle-plugin", version.ref = "kotlin" }
 kotlin-gradlePlugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
+spotless-gradlePlugin = { module = "com.diffplug.spotless:spotless-plugin-gradle", version.ref = "spotless" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
@@ -48,11 +48,12 @@ jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = 
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 android-library = { id = "com.android.library", version.ref = "agp" }
 jetbrains-kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+spotless = { id = "com.diffplug.spotless", version.ref = "spotless" }
 
 # Plugins defined by this project
-nowinandroid-android-application = { id = "nowinandroid.android.application", version = "unspecified" }
-nowinandroid-android-application-compose = { id = "nowinandroid.android.application.compose", version = "unspecified" }
-# nowinandroid-android-feature = { id = "nowinandroid.android.feature", version = "unspecified" }
-nowinandroid-android-library = { id = "nowinandroid.android.library", version = "unspecified" }
-nowinandroid-android-library-compose = { id = "nowinandroid.android.library.compose", version = "unspecified" }
-nowinandroid-jvm-library = { id = "nowinandroid.jvm.library", version = "unspecified" }
+newslayer-android-application = { id = "newslayer.android.application", version = "unspecified" }
+newslayer-android-application-compose = { id = "newslayer.android.application.compose", version = "unspecified" }
+# newslayer-android-feature = { id = "newslayer.android.feature", version = "unspecified" }
+newslayer-android-library = { id = "newslayer.android.library", version = "unspecified" }
+newslayer-android-library-compose = { id = "newslayer.android.library.compose", version = "unspecified" }
+newslayer-jvm-library = { id = "newslayer.jvm.library", version = "unspecified" }

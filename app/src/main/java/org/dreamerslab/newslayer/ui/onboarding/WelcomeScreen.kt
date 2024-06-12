@@ -38,7 +38,7 @@ fun WelcomeScreen(
     UpdateSystemBarColorsSideEffect()
 
     Scaffold(
-        modifier = modifier
+        modifier = modifier,
     ) { paddingValues ->
         Image(
             painter = painterResource(R.drawable.background),
@@ -64,7 +64,7 @@ fun WelcomeScreen(
 private fun BottomSheetContent(
     paddingValues: PaddingValues,
     onNextClick: () -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     Surface(
         modifier = Modifier
@@ -75,7 +75,7 @@ private fun BottomSheetContent(
         shape = RoundedCornerShape(
             topStart = 32.dp,
             topEnd = 32.dp,
-        )
+        ),
     ) {
         Column(
             modifier = Modifier
@@ -101,7 +101,7 @@ private fun BottomSheetContent(
             PrimaryButton(
                 label = stringResource(R.string.welcome_screen_get_started_button_label),
                 onClick = onNextClick,
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier.fillMaxWidth(),
             )
         }
     }

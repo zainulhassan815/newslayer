@@ -24,6 +24,7 @@ dependencies {
     compileOnly(libs.android.tools.common)
     compileOnly(libs.compose.gradlePlugin)
     compileOnly(libs.kotlin.gradlePlugin)
+    compileOnly(libs.spotless.gradlePlugin)
 }
 
 tasks {
@@ -54,6 +55,10 @@ gradlePlugin {
         register("jvmLibrary") {
             id = "newslayer.jvm.library"
             implementationClass = "JvmLibraryConventionPlugin"
+        }
+        register("spotlessPlugin") {
+            id = "newslayer.spotless"
+            implementationClass = "SpotlessPlugin"
         }
     }
 }
