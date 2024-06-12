@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="KtLint plugin">
+    <ktlintMode>DISABLED</ktlintMode>
+    <externalJarPaths>
+      <list>
+        <option value="$USER_HOME$/Downloads/ktlint-compose-0.4.4-all.jar" />
+      </list>
+    </externalJarPaths>
+  </component>
+</project>
