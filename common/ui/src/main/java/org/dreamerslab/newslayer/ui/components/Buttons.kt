@@ -21,7 +21,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import org.dreamerslab.newslayer.ui.theme.NewsLayerTheme
 import org.dreamerslab.newslayer.ui.theme.spacing
-import org.dreamerslab.newslayer.ui.utils.MultiThemePreview
+import org.dreamerslab.newslayer.ui.utils.PreviewMultiTheme
 
 @Composable
 fun PrimaryButton(
@@ -71,7 +71,7 @@ fun PrimaryButton(
     }
 }
 
-@MultiThemePreview
+@PreviewMultiTheme
 @Composable
 private fun PrimaryButtonPreview() {
     NewsLayerTheme {
@@ -85,8 +85,8 @@ private fun PrimaryButtonPreview() {
                 onClick = {},
                 icon = {
                     Icon(
-                        painter = painterResource(org.dreamerslab.newslayer.common.resources.R.drawable.check),
-                        contentDescription = ""
+                        painter = painterResource(org.dreamerslab.newslayer.common.resources.R.drawable.common_resources_check),
+                        contentDescription = "",
                     )
                 },
             )
@@ -94,7 +94,7 @@ private fun PrimaryButtonPreview() {
     }
 }
 
-@MultiThemePreview
+@PreviewMultiTheme
 @Composable
 private fun PrimaryButtonWithoutIconPreview() {
     NewsLayerTheme {
@@ -111,7 +111,7 @@ private fun PrimaryButtonWithoutIconPreview() {
     }
 }
 
-@MultiThemePreview
+@PreviewMultiTheme
 @Composable
 private fun PrimaryButtonLoadingPreview() {
     NewsLayerTheme {
@@ -125,8 +125,8 @@ private fun PrimaryButtonLoadingPreview() {
                 onClick = {},
                 icon = {
                     Icon(
-                        painter = painterResource(org.dreamerslab.newslayer.common.resources.R.drawable.check),
-                        contentDescription = ""
+                        painter = painterResource(org.dreamerslab.newslayer.common.resources.R.drawable.common_resources_check),
+                        contentDescription = "",
                     )
                 },
                 isLoading = true,

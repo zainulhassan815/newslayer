@@ -22,7 +22,7 @@ import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import org.dreamerslab.newslayer.ui.theme.NewsLayerTheme
 import org.dreamerslab.newslayer.ui.theme.spacing
-import org.dreamerslab.newslayer.ui.utils.MultiThemePreview
+import org.dreamerslab.newslayer.ui.utils.PreviewMultiTheme
 
 @Composable
 fun ListNewsCard(
@@ -41,15 +41,15 @@ fun ListNewsCard(
             .padding(MaterialTheme.spacing.large)
             .then(modifier),
         verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.spacedBy(MaterialTheme.spacing.medium)
+        horizontalArrangement = Arrangement.spacedBy(MaterialTheme.spacing.medium),
     ) {
         Column(
             verticalArrangement = Arrangement.Center,
-            modifier = Modifier.weight(1f)
+            modifier = Modifier.weight(1f),
         ) {
             SourceInfoRow(
                 source = source,
-                sourceImageUrl = sourceImageUrl
+                sourceImageUrl = sourceImageUrl,
             )
 
             Spacer(Modifier.height(MaterialTheme.spacing.medium))
@@ -75,7 +75,7 @@ fun ListNewsCard(
 
         NewsImage(
             imageUrl = newsImageUrl,
-            contentDescription = title
+            contentDescription = title,
         )
     }
 }
@@ -91,7 +91,7 @@ private fun NewsImage(
                 modifier = Modifier
                     .size(60.dp)
                     .clip(MaterialTheme.shapes.small)
-                    .background(MaterialTheme.colorScheme.secondaryContainer)
+                    .background(MaterialTheme.colorScheme.secondaryContainer),
             )
         } else {
             AsyncImage(
@@ -100,13 +100,13 @@ private fun NewsImage(
                 modifier = Modifier
                     .size(60.dp)
                     .clip(MaterialTheme.shapes.small)
-                    .background(MaterialTheme.colorScheme.secondaryContainer)
+                    .background(MaterialTheme.colorScheme.secondaryContainer),
             )
         }
     }
 }
 
-@MultiThemePreview
+@PreviewMultiTheme
 @Composable
 private fun ListNewsCardPreview() {
     NewsLayerTheme {
@@ -122,7 +122,7 @@ private fun ListNewsCardPreview() {
     }
 }
 
-@MultiThemePreview
+@PreviewMultiTheme
 @Composable
 private fun ListNewsCardWithoutImagePreview() {
     NewsLayerTheme {

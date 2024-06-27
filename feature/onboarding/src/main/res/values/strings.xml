@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="feature_onboarding_welcome_screen_message">Get a personalized feed with the stories you care about, delivered in your preferred format.</string>
+    <string name="feature_onboarding_welcome_screen_get_started_button_label">Get Started</string>
+    <string name="feature_onboarding_configure_screen_title">Configure</string>
+    <string name="feature_onboarding_cd_navigate_up">Navigate Up</string>
+    <string name="feature_onboarding_config_screen_enable_notifications_title">Enable Notifications</string>
+    <string name="feature_onboarding_config_screen_enable_notifications_subtitle">Allow app to send notifications</string>
+    <string name="feature_onboarding_config_screen_dark_mode_title">Dark Mode</string>
+    <string name="feature_onboarding_config_screen_dark_mode_subtitle">Configure dark mode</string>
+    <string name="feature_onboarding_config_screen_info_banner_msg">You can always change these settings later.</string>
+    <string name="feature_onboarding_config_screen_categories_section_title">Select Categories</string>
+    <string name="feature_onboarding_config_screen_categories_section_subtitle">Choose up to 5 categories you’re interested in</string>
+    <string name="feature_onboarding_config_screen_general_section_title">General</string>
+</resources>

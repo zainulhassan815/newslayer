@@ -1,7 +1,7 @@
-import org.gradle.api.Plugin
-import org.gradle.api.Project
 import com.diffplug.gradle.spotless.SpotlessExtension
 import org.dreamerslab.newslayer.configureSpotless
+import org.gradle.api.Plugin
+import org.gradle.api.Project
 import org.gradle.kotlin.dsl.getByType
 
 class SpotlessPlugin : Plugin<Project> {

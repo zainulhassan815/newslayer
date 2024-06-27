@@ -1,4 +1,4 @@
-package org.dreamerslab.newslayer.ui.onboarding
+package org.dreamerslab.newslayer.feature.onboarding
 
 import android.app.Activity
 import androidx.compose.foundation.Image
@@ -16,7 +16,6 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
@@ -26,9 +25,10 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.core.view.WindowCompat
-import org.dreamerslab.newslayer.R
 import org.dreamerslab.newslayer.ui.components.PrimaryButton
 import org.dreamerslab.newslayer.ui.theme.spacing
+import org.dreamerslab.newslayer.common.resources.R as CommonResources
+import androidx.compose.runtime.DisposableEffect
 
 @Composable
 fun WelcomeScreen(
@@ -85,21 +85,21 @@ private fun BottomSheetContent(
             verticalArrangement = Arrangement.spacedBy(MaterialTheme.spacing.medium),
         ) {
             Text(
-                text = stringResource(R.string.app_name),
+                text = stringResource(CommonResources.string.common_resources_app_name),
                 style = MaterialTheme.typography.headlineLarge,
                 textAlign = TextAlign.Center,
                 modifier = Modifier.fillMaxWidth(),
             )
 
             Text(
-                text = stringResource(R.string.welcome_screen_message),
+                text = stringResource(R.string.feature_onboarding_welcome_screen_message),
                 style = MaterialTheme.typography.bodyLarge,
                 textAlign = TextAlign.Center,
                 modifier = Modifier.fillMaxWidth(),
             )
 
             PrimaryButton(
-                label = stringResource(R.string.welcome_screen_get_started_button_label),
+                label = stringResource(R.string.feature_onboarding_welcome_screen_get_started_button_label),
                 onClick = onNextClick,
                 modifier = Modifier.fillMaxWidth(),
             )
@@ -111,9 +111,15 @@ private fun BottomSheetContent(
 private fun UpdateSystemBarColorsSideEffect() {
     val view = LocalView.current
     if (!view.isInEditMode) {
-        SideEffect {
+        DisposableEffect(Unit) {
             val window = (view.context as Activity).window
-            WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = false
+            val controller = WindowCompat.getInsetsController(window, view)
+            val previousAppearance = controller.isAppearanceLightStatusBars
+            controller.isAppearanceLightStatusBars = false
+
+            onDispose {
+                controller.isAppearanceLightStatusBars = previousAppearance
+            }
         }
     }
 }

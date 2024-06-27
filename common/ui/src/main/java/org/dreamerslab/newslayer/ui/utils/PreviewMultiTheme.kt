@@ -5,10 +5,10 @@ import androidx.compose.ui.tooling.preview.Preview
 
 @Preview(
     uiMode = Configuration.UI_MODE_NIGHT_YES,
-    group = "Dark Theme"
+    group = "Dark Theme",
 )
 @Preview(
     uiMode = Configuration.UI_MODE_NIGHT_NO,
-    group = "Light Theme"
+    group = "Light Theme",
 )
-annotation class MultiThemePreview
+annotation class PreviewMultiTheme

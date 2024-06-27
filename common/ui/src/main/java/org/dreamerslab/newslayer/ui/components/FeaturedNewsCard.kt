@@ -19,7 +19,7 @@ import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import org.dreamerslab.newslayer.ui.theme.NewsLayerTheme
 import org.dreamerslab.newslayer.ui.theme.spacing
-import org.dreamerslab.newslayer.ui.utils.MultiThemePreview
+import org.dreamerslab.newslayer.ui.utils.PreviewMultiTheme
 
 @Composable
 fun FeaturedNewsCard(
@@ -38,12 +38,12 @@ fun FeaturedNewsCard(
     ) {
         FeaturedImage(
             imageUrl = newsImageUrl,
-            contentDescription = title
+            contentDescription = title,
         )
 
         SourceInfoRow(
             source = source,
-            sourceImageUrl = sourceImageUrl
+            sourceImageUrl = sourceImageUrl,
         )
 
         Spacer(Modifier.height(MaterialTheme.spacing.medium))
@@ -80,7 +80,7 @@ private fun FeaturedImage(
                     .fillMaxWidth()
                     .height(220.dp)
                     .clip(MaterialTheme.shapes.small)
-                    .background(MaterialTheme.colorScheme.secondaryContainer)
+                    .background(MaterialTheme.colorScheme.secondaryContainer),
             )
         } else {
             AsyncImage(
@@ -90,7 +90,7 @@ private fun FeaturedImage(
                     .fillMaxWidth()
                     .height(220.dp)
                     .clip(MaterialTheme.shapes.small)
-                    .background(MaterialTheme.colorScheme.secondaryContainer)
+                    .background(MaterialTheme.colorScheme.secondaryContainer),
             )
         }
 
@@ -98,7 +98,7 @@ private fun FeaturedImage(
     }
 }
 
-@MultiThemePreview
+@PreviewMultiTheme
 @Composable
 private fun FeaturedNewsCardPreview() {
     NewsLayerTheme {
@@ -117,7 +117,7 @@ private fun FeaturedNewsCardPreview() {
     }
 }
 
-@MultiThemePreview
+@PreviewMultiTheme
 @Composable
 private fun FeaturedNewsCardWithoutImagePreview() {
     NewsLayerTheme {

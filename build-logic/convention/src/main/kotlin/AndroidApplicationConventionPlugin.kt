@@ -3,7 +3,6 @@ import org.dreamerslab.newslayer.Versions
 import org.dreamerslab.newslayer.configureKotlinAndroid
 import org.gradle.api.Plugin
 import org.gradle.api.Project
-import org.gradle.kotlin.dsl.apply
 import org.gradle.kotlin.dsl.configure
 
 class AndroidApplicationConventionPlugin : Plugin<Project> {
@@ -12,6 +11,7 @@ class AndroidApplicationConventionPlugin : Plugin<Project> {
             with(pluginManager) {
                 apply("com.android.application")
                 apply("org.jetbrains.kotlin.android")
+                apply("newslayer.android.hilt")
                 apply("newslayer.spotless")
             }
 

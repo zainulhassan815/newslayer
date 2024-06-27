@@ -2,6 +2,7 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
     `kotlin-dsl`
+    alias(libs.plugins.spotless)
 }
 
 group = "org.dreamerslab.newslayer.buildlogic"
@@ -19,12 +20,26 @@ kotlin {
     }
 }
 
+spotless {
+    val ktlintVersion = libs.versions.ktlint.get()
+
+    kotlin {
+        target("src/**/*.kt")
+        ktlint(ktlintVersion)
+    }
+
+    kotlinGradle {
+        target("*.kts")
+        ktlint(ktlintVersion)
+    }
+}
+
 dependencies {
     compileOnly(libs.android.gradlePlugin)
-    compileOnly(libs.android.tools.common)
     compileOnly(libs.compose.gradlePlugin)
     compileOnly(libs.kotlin.gradlePlugin)
     compileOnly(libs.spotless.gradlePlugin)
+    compileOnly(libs.ksp.gradlePlugin)
 }
 
 tasks {
@@ -55,6 +70,14 @@ gradlePlugin {
         register("jvmLibrary") {
             id = "newslayer.jvm.library"
             implementationClass = "JvmLibraryConventionPlugin"
+        }
+        register("androidHilt") {
+            id = "newslayer.android.hilt"
+            implementationClass = "AndroidHiltConventionPlugin"
+        }
+        register("androidFeature") {
+            id = "newslayer.android.feature"
+            implementationClass = "AndroidFeatureConventionPlugin"
         }
         register("spotlessPlugin") {
             id = "newslayer.spotless"

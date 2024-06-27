@@ -17,65 +17,70 @@ import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import org.dreamerslab.newslayer.ui.theme.NewsLayerTheme
 import org.dreamerslab.newslayer.ui.theme.spacing
-import org.dreamerslab.newslayer.ui.utils.MultiThemePreview
+import org.dreamerslab.newslayer.ui.utils.PreviewMultiTheme
 
 @Composable
 fun SourceInfoRow(
     source: String,
     sourceImageUrl: String?,
+    modifier: Modifier = Modifier,
 ) {
-    if (sourceImageUrl == null) {
-        Text(
-            text = source,
-            style = MaterialTheme.typography.labelMedium,
-            color = MaterialTheme.colorScheme.onSurface,
-        )
-    } else {
-        Row(
-            horizontalArrangement = Arrangement.spacedBy(MaterialTheme.spacing.small),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            if (LocalView.current.isInEditMode) {
-                Spacer(
-                    modifier = Modifier
-                        .size(18.dp)
-                        .background(MaterialTheme.colorScheme.secondaryContainer)
-                )
-            } else {
-                AsyncImage(
-                    model = sourceImageUrl,
-                    contentDescription = source,
-                    modifier = Modifier
-                        .size(18.dp)
-                        .background(MaterialTheme.colorScheme.secondaryContainer)
-                )
-            }
-
+    Surface(
+        modifier = modifier,
+    ) {
+        if (sourceImageUrl == null) {
             Text(
                 text = source,
                 style = MaterialTheme.typography.labelMedium,
                 color = MaterialTheme.colorScheme.onSurface,
-                maxLines = 1,
-                overflow = TextOverflow.Ellipsis,
             )
+        } else {
+            Row(
+                horizontalArrangement = Arrangement.spacedBy(MaterialTheme.spacing.small),
+                verticalAlignment = Alignment.CenterVertically,
+            ) {
+                if (LocalView.current.isInEditMode) {
+                    Spacer(
+                        modifier = Modifier
+                            .size(18.dp)
+                            .background(MaterialTheme.colorScheme.secondaryContainer),
+                    )
+                } else {
+                    AsyncImage(
+                        model = sourceImageUrl,
+                        contentDescription = source,
+                        modifier = Modifier
+                            .size(18.dp)
+                            .background(MaterialTheme.colorScheme.secondaryContainer),
+                    )
+                }
+
+                Text(
+                    text = source,
+                    style = MaterialTheme.typography.labelMedium,
+                    color = MaterialTheme.colorScheme.onSurface,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis,
+                )
+            }
         }
     }
 }
 
-@MultiThemePreview
+@PreviewMultiTheme
 @Composable
 private fun SourceInfoPreview() {
     NewsLayerTheme {
         Surface {
             SourceInfoRow(
                 source = "The New York Times",
-                sourceImageUrl = ""
+                sourceImageUrl = "",
             )
         }
     }
 }
 
-@MultiThemePreview
+@PreviewMultiTheme
 @Composable
 private fun SourceInfoWithoutIconPreview() {
     NewsLayerTheme {

@@ -27,6 +27,12 @@
             <option value="$PROJECT_DIR$/common" />
             <option value="$PROJECT_DIR$/common/resources" />
             <option value="$PROJECT_DIR$/common/ui" />
+            <option value="$PROJECT_DIR$/core" />
+            <option value="$PROJECT_DIR$/core/data" />
+            <option value="$PROJECT_DIR$/core/datastore" />
+            <option value="$PROJECT_DIR$/core/model" />
+            <option value="$PROJECT_DIR$/feature" />
+            <option value="$PROJECT_DIR$/feature/onboarding" />
           </set>
         </option>
         <option name="resolveExternalAnnotations" value="false" />

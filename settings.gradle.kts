@@ -28,3 +28,7 @@ rootProject.name = "NewsLayer"
 include(":app")
 include(":common:ui")
 include(":common:resources")
+include(":core:model")
+include(":core:datastore")
+include(":feature:onboarding")
+include(":core:data")

@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">News Layer</string>
+    <string name="common_resources_app_name">News Layer</string>
+    <string name="common_resources_theme_mode_light">Light</string>
+    <string name="common_resources_theme_mode_dark">Dark</string>
+    <string name="common_resources_theme_mode_system">System</string>
 </resources>

@@ -1,5 +1,3 @@
 <resources>
-    <string name="app_name">News Layer</string>
-    <string name="welcome_screen_message">Get a personalized feed with the stories you care about, delivered in your preferred format.</string>
-    <string name="welcome_screen_get_started_button_label">Get Started</string>
+    <string name="common_resources_app_name">News Layer</string>
 </resources>

@@ -30,7 +30,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import org.dreamerslab.newslayer.ui.theme.NewsLayerTheme
 import org.dreamerslab.newslayer.ui.theme.spacing
-import org.dreamerslab.newslayer.ui.utils.MultiThemePreview
+import org.dreamerslab.newslayer.ui.utils.PreviewMultiTheme
 
 @Composable
 fun SelectableChip(
@@ -43,7 +43,7 @@ fun SelectableChip(
 ) {
     val backgroundColor by animateColorAsState(
         targetValue = if (selected) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.surface,
-        label = "Chip Background Color"
+        label = "Chip Background Color",
     )
 
     Surface(
@@ -62,7 +62,7 @@ fun SelectableChip(
                     horizontal = MaterialTheme.spacing.large,
                     vertical = MaterialTheme.spacing.small,
                 ),
-            contentAlignment = Alignment.Center
+            contentAlignment = Alignment.Center,
         ) {
             if (icon != null || selectedIcon != null) {
                 Row(
@@ -99,7 +99,7 @@ private fun ChipIcon(
                 transitionSpec = {
                     (scaleIn() togetherWith scaleOut())
                 },
-                modifier = sizeModifier
+                modifier = sizeModifier,
             ) { isSelected ->
                 if (isSelected) {
                     selectedIcon()
@@ -127,18 +127,18 @@ private fun ChipText(
     Text(
         text = text,
         style = MaterialTheme.typography.bodyMedium,
-        modifier = modifier
+        modifier = modifier,
     )
 }
 
-@MultiThemePreview
+@PreviewMultiTheme
 @Composable
 private fun SelectableChipWithIconPreview() {
     NewsLayerTheme {
         Surface(
             modifier = Modifier
                 .background(MaterialTheme.colorScheme.background)
-                .padding(16.dp)
+                .padding(16.dp),
         ) {
             var selected by remember { mutableStateOf(false) }
 
@@ -157,20 +157,20 @@ private fun SelectableChipWithIconPreview() {
                         imageVector = Icons.Default.Check,
                         contentDescription = null,
                     )
-                }
+                },
             )
         }
     }
 }
 
-@MultiThemePreview
+@PreviewMultiTheme
 @Composable
 private fun SelectableChipWithoutIconPreview() {
     NewsLayerTheme {
         Surface(
             modifier = Modifier
                 .background(MaterialTheme.colorScheme.background)
-                .padding(16.dp)
+                .padding(16.dp),
         ) {
             var selected by remember { mutableStateOf(false) }
 

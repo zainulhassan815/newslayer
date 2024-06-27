@@ -10,7 +10,7 @@ private val fontFamily = FontFamily(
     Font(R.font.poppins_regular, FontWeight.Normal),
     Font(R.font.poppins_medium, FontWeight.Medium),
     Font(R.font.poppins_semibold, FontWeight.SemiBold),
-    Font(R.font.poppins_bold, FontWeight.Bold)
+    Font(R.font.poppins_bold, FontWeight.Bold),
 )
 
 private val defaultTypography = Typography()
@@ -18,23 +18,23 @@ private val defaultTypography = Typography()
 internal val NewsLayerTypography = Typography(
     displayLarge = defaultTypography.displayLarge.copy(
         fontFamily = fontFamily,
-        fontWeight = FontWeight.Bold
+        fontWeight = FontWeight.Bold,
     ),
     displayMedium = defaultTypography.displayMedium.copy(
         fontFamily = fontFamily,
-        fontWeight = FontWeight.Bold
+        fontWeight = FontWeight.Bold,
     ),
     displaySmall = defaultTypography.displaySmall.copy(
         fontFamily = fontFamily,
-        fontWeight = FontWeight.SemiBold
+        fontWeight = FontWeight.SemiBold,
     ),
     headlineLarge = defaultTypography.headlineLarge.copy(
         fontFamily = fontFamily,
-        fontWeight = FontWeight.SemiBold
+        fontWeight = FontWeight.SemiBold,
     ),
     headlineMedium = defaultTypography.headlineMedium.copy(
         fontFamily = fontFamily,
-        fontWeight = FontWeight.SemiBold
+        fontWeight = FontWeight.SemiBold,
     ),
     headlineSmall = defaultTypography.headlineSmall.copy(
         fontFamily = fontFamily,
@@ -53,13 +53,13 @@ internal val NewsLayerTypography = Typography(
         fontWeight = FontWeight.Medium,
     ),
     bodyLarge = defaultTypography.bodyLarge.copy(
-        fontFamily = fontFamily
+        fontFamily = fontFamily,
     ),
     bodyMedium = defaultTypography.bodyMedium.copy(
-        fontFamily = fontFamily
+        fontFamily = fontFamily,
     ),
     bodySmall = defaultTypography.bodySmall.copy(
-        fontFamily = fontFamily
+        fontFamily = fontFamily,
     ),
     labelLarge = defaultTypography.labelLarge.copy(
         fontFamily = fontFamily,
@@ -68,6 +68,6 @@ internal val NewsLayerTypography = Typography(
         fontFamily = fontFamily,
     ),
     labelSmall = defaultTypography.labelSmall.copy(
-        fontFamily = fontFamily
-    )
+        fontFamily = fontFamily,
+    ),
 )
