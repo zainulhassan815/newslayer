@@ -4,13 +4,12 @@ plugins {
 }
 
 android {
-    namespace = "org.dreamerslab.newslayer.feature.onboarding"
+    namespace = "org.dreamerslab.newslayer.feature.home"
 
     defaultConfig {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
     }
-
 }
 
 dependencies {
@@ -21,5 +20,4 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
-    implementation(libs.accompanist.permissions)
 }

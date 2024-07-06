@@ -2,6 +2,8 @@
 agp = "8.4.2"
 androidxHiltNavigationCompose = "1.2.0"
 androidxLifecycle = "2.8.2"
+androidxCoreSplashscreen = "1.0.1"
+accompanist = "0.34.0"
 arrow = "1.2.4"
 datastore = "1.1.1"
 kotlin = "2.0.0"
@@ -53,7 +55,11 @@ androidx-lifecycle-runtimeCompose = { group = "androidx.lifecycle", name = "life
 androidx-lifecycle-runtimeTesting = { group = "androidx.lifecycle", name = "lifecycle-runtime-testing", version.ref = "androidxLifecycle" }
 androidx-lifecycle-viewModelCompose = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-compose", version.ref = "androidxLifecycle" }
 
+androidx-core-splashscreen = { group = "androidx.core", name = "core-splashscreen", version.ref = "androidxCoreSplashscreen" }
+
 androidx-datastore = { module = "androidx.datastore:datastore", version.ref = "datastore" }
+
+accompanist-permissions = { module = "com.google.accompanist:accompanist-permissions", version.ref = "accompanist" }
 
 arrow-core = { module = "io.arrow-kt:arrow-core", version.ref = "arrow" }
 arrow-core-retrofit = { module = "io.arrow-kt:arrow-core-retrofit", version.ref = "arrow" }

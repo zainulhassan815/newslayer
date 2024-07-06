@@ -1,6 +1,8 @@
 package org.dreamerslab.newslayer.feature.onboarding
 
 import org.dreamerslab.newslayer.common.resources.R as CommonResources
+import android.Manifest
+import android.os.Build
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -14,7 +16,9 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeContentPadding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowDropDown
@@ -28,16 +32,21 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.ListItem
 import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SheetState
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.rememberModalBottomSheetState
+import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -45,8 +54,14 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.google.accompanist.permissions.ExperimentalPermissionsApi
+import com.google.accompanist.permissions.isGranted
+import com.google.accompanist.permissions.rememberPermissionState
+import com.google.accompanist.permissions.shouldShowRationale
+import kotlinx.coroutines.launch
 import org.dreamerslab.newslayer.core.model.DarkThemeConfig
 import org.dreamerslab.newslayer.core.model.FollowableCategory
 import org.dreamerslab.newslayer.ui.components.PrimaryButton
@@ -179,12 +194,27 @@ private fun ConfigScreenContent(
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalPermissionsApi::class)
 @Composable
 fun EnableNotificationsTile(
     enabled: Boolean,
     onChange: (enabled: Boolean) -> Unit,
     modifier: Modifier = Modifier,
 ) {
+    var showModalBottomSheet by remember { mutableStateOf(false) }
+    val sheetState = rememberModalBottomSheetState()
+    val scope = rememberCoroutineScope()
+
+    @Suppress("InlinedApi")
+    val permissionState = rememberPermissionState(
+        permission = Manifest.permission.POST_NOTIFICATIONS
+    ) { granted ->
+        if (granted) {
+            scope.launch { sheetState.hide() }
+            onChange(true)
+        }
+    }
+
     ListItem(
         modifier = modifier,
         leadingContent = {
@@ -202,10 +232,85 @@ fun EnableNotificationsTile(
         trailingContent = {
             Switch(
                 checked = enabled,
-                onCheckedChange = { onChange(enabled.not()) }
+                onCheckedChange = {
+                    when {
+                        permissionState.status.isGranted -> onChange(enabled.not())
+                        Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU -> {
+                            if (permissionState.status.shouldShowRationale) {
+                                showModalBottomSheet = true
+                            } else {
+                                permissionState.launchPermissionRequest()
+                            }
+                        }
+                    }
+                }
             )
         }
     )
+
+    if (showModalBottomSheet) {
+        EnableNotificationsBottomSheet(
+            sheetState = sheetState,
+            onDismissRequest = { showModalBottomSheet = false },
+            onEnableNotificationsClick = {
+                permissionState.launchPermissionRequest()
+            }
+        )
+    }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun EnableNotificationsBottomSheet(
+    sheetState: SheetState,
+    onDismissRequest: () -> Unit,
+    onEnableNotificationsClick: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    ModalBottomSheet(
+        onDismissRequest = onDismissRequest,
+        sheetState = sheetState,
+        modifier = modifier
+    ) {
+        Column(
+            modifier = Modifier
+                .padding(MaterialTheme.spacing.large)
+                .fillMaxWidth(),
+            verticalArrangement = Arrangement.spacedBy(MaterialTheme.spacing.medium),
+            horizontalAlignment = Alignment.CenterHorizontally,
+        ) {
+            Box(
+                modifier = Modifier
+                    .size(56.dp)
+                    .clip(CircleShape)
+                    .background(MaterialTheme.colorScheme.surfaceColorAtElevation(8.dp)),
+                contentAlignment = Alignment.Center
+            ) {
+                Icon(
+                    painter = painterResource(CommonResources.drawable.common_resources_notifications),
+                    contentDescription = null,
+                )
+            }
+
+            Text(
+                text = stringResource(R.string.feature_onboarding_config_screen_enable_notifications_sheet_title),
+                style = MaterialTheme.typography.titleLarge,
+                textAlign = TextAlign.Center,
+            )
+
+            Text(
+                text = stringResource(R.string.feature_onboarding_config_screen_enable_notifications_sheet_subtitle),
+                style = MaterialTheme.typography.bodyLarge,
+                textAlign = TextAlign.Center,
+            )
+
+            PrimaryButton(
+                label = stringResource(R.string.feature_onboarding_config_screen_enable_notifications_sheet_button_label),
+                onClick = onEnableNotificationsClick,
+                modifier = Modifier.fillMaxWidth()
+            )
+        }
+    }
 }
 
 @Composable
@@ -265,7 +370,11 @@ fun ThemeSelectionButton(
         expanded = expanded,
         onDismissRequest = { expanded = false },
     ) {
-        DarkThemeConfig.entries.forEach { config ->
+        listOf(
+            DarkThemeConfig.LIGHT,
+            DarkThemeConfig.DARK,
+            DarkThemeConfig.FOLLOW_SYSTEM,
+        ).forEach { config ->
             val title = config.getStringResource()
 
             DropdownMenuItem(
