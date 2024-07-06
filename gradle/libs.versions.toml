@@ -5,29 +5,28 @@ androidxLifecycle = "2.8.2"
 androidxCoreSplashscreen = "1.0.1"
 accompanist = "0.34.0"
 arrow = "1.2.4"
-datastore = "1.1.1"
-kotlin = "2.0.0"
-kotlinxDatetime = "0.6.0"
-kotlinxSerializationJson = "1.7.0"
+activityCompose = "1.9.0"
+composeBom = "2024.06.00"
 coreKtx = "1.13.1"
 coil = "2.6.0"
+datastore = "1.1.1"
+espressoCore = "3.5.1"
 hilt = "2.51.1"
 junit = "4.13.2"
 junitVersion = "1.1.5"
-espressoCore = "3.5.1"
-lifecycleRuntimeKtx = "2.8.2"
-activityCompose = "1.9.0"
-composeBom = "2024.06.00"
-okhttp = "4.12.0"
+kotlin = "2.0.0"
+kotlinxDatetime = "0.6.0"
+kotlinxSerializationJson = "1.7.0"
 ktlint = "1.0.1"
 ksp = "2.0.0-1.0.21"
+lifecycleRuntimeKtx = "2.8.2"
+okhttp = "4.12.0"
+protobuf = "4.26.0"
+protobufPlugin = "0.9.4"
+paging = "3.3.0"
 retrofit = "2.11.0"
 room = "2.6.1"
 spotless = "6.25.0"
-protobuf = "4.26.0"
-protobufPlugin = "0.9.4"
-appcompat = "1.7.0"
-material = "1.12.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -82,15 +81,15 @@ retrofit-kotlin-serialization = { group = "com.squareup.retrofit2", name = "conv
 room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }
 room-ktx = { module = "androidx.room:room-ktx", version.ref = "room" }
 
+androidx-paging-runtime = { module = "androidx.paging:paging-runtime", version.ref = "paging" }
+androidx-paging-compose = { module = "androidx.paging:paging-compose", version.ref = "paging" }
+
 # Dependencies of the included build-logic
 android-gradlePlugin = { group = "com.android.tools.build", name = "gradle", version.ref = "agp" }
 compose-gradlePlugin = { module = "org.jetbrains.kotlin:compose-compiler-gradle-plugin", version.ref = "kotlin" }
 kotlin-gradlePlugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
 spotless-gradlePlugin = { module = "com.diffplug.spotless:spotless-plugin-gradle", version.ref = "spotless" }
 ksp-gradlePlugin = { group = "com.google.devtools.ksp", name = "com.google.devtools.ksp.gradle.plugin", version.ref = "ksp" }
-
-androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
-material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

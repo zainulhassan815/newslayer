@@ -2,24 +2,15 @@ package org.dreamerslab.newslayer.feature.home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.cachedIn
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.stateIn
-import org.dreamerslab.newslayer.core.data.repository.NewsArticlesQuery
+import org.dreamerslab.newslayer.core.data.repository.NewsArticlesPagingSource
 import org.dreamerslab.newslayer.core.data.repository.NewsRepository
-import org.dreamerslab.newslayer.core.model.NewsArticle
-
-sealed interface CategoryListState {
-    data object Loading : CategoryListState
-    data object Error : CategoryListState
-    data class Success(
-        val articles: List<NewsArticle>
-    ) : CategoryListState
-}
 
 @HiltViewModel(assistedFactory = CategoryListViewModel.CategoryListViewModelFactory::class)
 class CategoryListViewModel @AssistedInject constructor(
@@ -32,20 +23,18 @@ class CategoryListViewModel @AssistedInject constructor(
         fun create(category: String): CategoryListViewModel
     }
 
-    val state = newsRepository.getNewsArticles(
-        query = NewsArticlesQuery(
-            categories = setOf(category),
-        )
-    ).map { result ->
-        result.fold(
-            ifLeft = { CategoryListState.Error },
-            ifRight = { articlesPage ->
-                CategoryListState.Success(articlesPage.newsArticles)
-            }
-        )
-    }.stateIn(
-        scope = viewModelScope,
-        started = SharingStarted.WhileSubscribed(5_000L),
-        initialValue = CategoryListState.Loading
+    val pagingData = Pager(
+        config = PagingConfig(
+            pageSize = 10,
+            initialLoadSize = 10
+        ),
+        pagingSourceFactory = {
+            NewsArticlesPagingSource(
+                categories = setOf(category),
+                newsRepository = newsRepository
+            )
+        }
     )
+        .flow
+        .cachedIn(viewModelScope)
 }

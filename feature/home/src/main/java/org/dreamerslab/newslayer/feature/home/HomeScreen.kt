@@ -75,6 +75,8 @@ fun HomeScreen(
 
             HorizontalPager(
                 state = pagerState,
+                key = { it },
+                beyondViewportPageCount = 2, // Loads next two pages in advance
             ) { page ->
                 CategoryList(
                     viewModel = hiltViewModel(
