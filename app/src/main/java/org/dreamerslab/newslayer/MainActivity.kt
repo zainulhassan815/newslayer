@@ -12,7 +12,6 @@ import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Modifier
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -23,7 +22,6 @@ import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import org.dreamerslab.newslayer.core.model.DarkThemeConfig
 import org.dreamerslab.newslayer.feature.home.HomeScreen
-import org.dreamerslab.newslayer.feature.onboarding.OnboardingScreen
 import org.dreamerslab.newslayer.ui.theme.NewsLayerTheme
 
 @AndroidEntryPoint

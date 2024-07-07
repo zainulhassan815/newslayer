@@ -12,7 +12,7 @@ import org.dreamerslab.newslayer.core.model.UserData
 
 @HiltViewModel
 class MainActivityViewModel @Inject constructor(
-    private val userDataRepository: UserDataRepository
+    userDataRepository: UserDataRepository
 ) : ViewModel() {
     val state = userDataRepository.userData.map {
         MainActivityState.Success(it)
