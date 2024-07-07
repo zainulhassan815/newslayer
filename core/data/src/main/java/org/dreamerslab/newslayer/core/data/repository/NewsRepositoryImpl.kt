@@ -49,7 +49,7 @@ class NewsRepositoryImpl @Inject constructor(
     ): Flow<Either<NewsRepositoryFailure, NewsArticlesPage>> = flow {
         newsDataApi.getNewsArticles(
             searchQuery = query.searchQuery,
-            categories = query.categories,
+            categories = query.categories?.joinToString(separator = ",") { it.name },
             page = query.page
         ).map {
             it.toResultPage(previousPage = query.page)

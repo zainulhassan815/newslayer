@@ -3,11 +3,12 @@ package org.dreamerslab.newslayer.core.data.repository
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import kotlinx.coroutines.flow.first
+import org.dreamerslab.newslayer.core.model.Category
 import org.dreamerslab.newslayer.core.model.NewsArticle
 
 class NewsArticlesPagingSource(
     private val searchQuery: String? = null,
-    private val categories: Set<String>? = null,
+    private val categories: Set<Category>? = null,
     private val newsRepository: NewsRepository
 ) : PagingSource<String, NewsArticle>() {
 

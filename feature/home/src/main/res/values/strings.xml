@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="feature_home_appbar_title">Home</string>
+    <string name="feature_home_cd_show_notifications">Show Notifications</string>
+    <string name="feature_home_cd_open_settings">Open Settings</string>
+
+    <string name="feature_home_category_list_try_again_btn_label">Try Again</string>
+    <string name="feature_home_category_list_load_more_articles_btn_label">Load More Articles</string>
+
+    <string name="feature_home_category_list_error_title">Error Occurred</string>
+    <string name="feature_home_category_list_error_message">We are having trouble connecting the server. Please make sure you have an active network connection and try again.</string>
+
+    <string name="feature_home_category_for_you">For You</string>
+</resources>

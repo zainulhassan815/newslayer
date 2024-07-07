@@ -11,16 +11,17 @@ import dagger.assisted.AssistedInject
 import dagger.hilt.android.lifecycle.HiltViewModel
 import org.dreamerslab.newslayer.core.data.repository.NewsArticlesPagingSource
 import org.dreamerslab.newslayer.core.data.repository.NewsRepository
+import org.dreamerslab.newslayer.core.model.Category
 
 @HiltViewModel(assistedFactory = CategoryListViewModel.CategoryListViewModelFactory::class)
 class CategoryListViewModel @AssistedInject constructor(
-    @Assisted category: String,
+    @Assisted categories: List<Category>,
     newsRepository: NewsRepository,
 ) : ViewModel() {
 
     @AssistedFactory
     interface CategoryListViewModelFactory {
-        fun create(category: String): CategoryListViewModel
+        fun create(categories: List<Category>): CategoryListViewModel
     }
 
     val pagingData = Pager(
@@ -30,7 +31,7 @@ class CategoryListViewModel @AssistedInject constructor(
         ),
         pagingSourceFactory = {
             NewsArticlesPagingSource(
-                categories = setOf(category),
+                categories = categories.toSet(),
                 newsRepository = newsRepository
             )
         }

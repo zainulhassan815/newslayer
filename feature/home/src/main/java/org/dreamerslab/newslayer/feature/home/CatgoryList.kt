@@ -2,22 +2,38 @@ package org.dreamerslab.newslayer.feature.home
 
 import org.dreamerslab.newslayer.common.resources.R as CommonResources
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.exclude
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.statusBars
+import androidx.compose.foundation.layout.systemBars
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyListState
+import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.derivedStateOf
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.itemKey
+import kotlinx.coroutines.launch
 import kotlinx.datetime.format
 import kotlinx.datetime.format.DateTimeComponents
 import kotlinx.datetime.format.MonthNames
@@ -51,8 +67,8 @@ fun CategoryList(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(MaterialTheme.spacing.large),
-            title = "Error Occurred",
-            subtitle = "We are having trouble connecting the server. Please make sure you have an active network connection and try again.",
+            title = stringResource(R.string.feature_home_category_list_error_title),
+            subtitle = stringResource(R.string.feature_home_category_list_error_message),
             icon = {
                 Icon(
                     painter = painterResource(CommonResources.drawable.common_resources_report),
@@ -61,7 +77,7 @@ fun CategoryList(
             },
             action = {
                 PrimaryButton(
-                    label = "Try Again",
+                    label = stringResource(R.string.feature_home_category_list_try_again_btn_label),
                     onClick = {
                         pagingItems.refresh()
                     }
@@ -76,7 +92,7 @@ fun CategoryList(
             CircularProgressIndicator()
         }
 
-        else -> ArticlesList(
+        else -> ArticlesListScaffold(
             modifier = modifier,
             pagingItems = pagingItems,
             onArticleClick = {}
@@ -85,13 +101,56 @@ fun CategoryList(
 }
 
 @Composable
-fun ArticlesList(
+private fun ArticlesListScaffold(
     pagingItems: LazyPagingItems<NewsArticle>,
     onArticleClick: (article: NewsArticle) -> Unit,
     modifier: Modifier = Modifier
 ) {
+    val scope = rememberCoroutineScope()
+    val listState = rememberLazyListState()
+    val showFloatingActionButton by remember(listState) {
+        derivedStateOf {
+            listState.firstVisibleItemIndex > 0
+        }
+    }
+
+    Scaffold(
+        modifier = modifier,
+        contentWindowInsets = WindowInsets.systemBars.exclude(WindowInsets.statusBars),
+        floatingActionButton = {
+            if (showFloatingActionButton) FloatingActionButton(
+                onClick = {
+                    scope.launch { listState.scrollToItem(0) }
+                }
+            ) {
+                Icon(
+                    imageVector = Icons.Default.KeyboardArrowUp,
+                    contentDescription = null
+                )
+            }
+        }
+    ) { padding ->
+        ArticlesList(
+            pagingItems = pagingItems,
+            onArticleClick = onArticleClick,
+            listState = listState,
+            contentPadding = padding
+        )
+    }
+}
+
+@Composable
+fun ArticlesList(
+    pagingItems: LazyPagingItems<NewsArticle>,
+    onArticleClick: (article: NewsArticle) -> Unit,
+    modifier: Modifier = Modifier,
+    listState: LazyListState = rememberLazyListState(),
+    contentPadding: PaddingValues = PaddingValues()
+) {
     LazyColumn(
-        modifier = modifier
+        modifier = modifier,
+        state = listState,
+        contentPadding = contentPadding
     ) {
         items(
             count = pagingItems.itemCount,
@@ -108,6 +167,7 @@ fun ArticlesList(
                 newsImageUrl = article.headerImageUrl,
                 date = date,
                 onClick = { onArticleClick(article) },
+                showDivider = true,
             )
         }
 
@@ -130,7 +190,7 @@ fun ArticlesList(
                 contentAlignment = Alignment.Center,
             ) {
                 PrimaryButton(
-                    label = "Load More Articles",
+                    label = stringResource(R.string.feature_home_category_list_load_more_articles_btn_label),
                     icon = {
                         Icon(
                             painter = painterResource(CommonResources.drawable.common_resources_add),
