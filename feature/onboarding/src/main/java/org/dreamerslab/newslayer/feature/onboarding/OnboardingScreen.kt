@@ -6,13 +6,11 @@ import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
-import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.hilt.navigation.compose.hiltViewModel
 import kotlinx.coroutines.launch
 
 @Composable
-fun OnboardingScreen(
-    onContinueClick: () -> Unit
-) {
+fun OnboardingScreen() {
     val pagerState = rememberPagerState { 2 }
     val scope = rememberCoroutineScope()
 
@@ -34,8 +32,7 @@ fun OnboardingScreen(
                 onNavigateUp = {
                     scope.launch { pagerState.animateScrollToPage(0) }
                 },
-                onContinueClick = onContinueClick,
-                viewModel = viewModel()
+                viewModel = hiltViewModel()
             )
         }
     }

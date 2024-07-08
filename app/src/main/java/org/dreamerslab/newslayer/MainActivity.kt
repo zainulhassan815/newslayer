@@ -21,7 +21,7 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import org.dreamerslab.newslayer.core.model.DarkThemeConfig
-import org.dreamerslab.newslayer.feature.home.HomeScreen
+import org.dreamerslab.newslayer.core.model.UserData
 import org.dreamerslab.newslayer.ui.theme.NewsLayerTheme
 
 @AndroidEntryPoint
@@ -33,18 +33,18 @@ class MainActivity : ComponentActivity() {
         val splashScreen = installSplashScreen()
         super.onCreate(savedInstanceState)
 
-        var state: MainActivityState by mutableStateOf(MainActivityState.Loading)
+        var uiState: MainActivityState by mutableStateOf(MainActivityState.Loading)
 
         lifecycleScope.launch {
             lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.state
-                    .onEach { state = it }
+                    .onEach { uiState = it }
                     .collect()
             }
         }
 
         splashScreen.setKeepOnScreenCondition {
-            when (state) {
+            when (uiState) {
                 MainActivityState.Loading -> true
                 is MainActivityState.Success -> false
             }
@@ -53,7 +53,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
 
         setContent {
-            val darkTheme = shouldUseDarkTheme(state)
+            val darkTheme = shouldUseDarkTheme(uiState)
 
             // Update the edge to edge configuration to match the theme
             // This is the same parameters as the default enableEdgeToEdge call, but we manually
@@ -73,15 +73,26 @@ class MainActivity : ComponentActivity() {
                 onDispose {}
             }
 
-            NewsLayerTheme(
-                darkTheme = darkTheme
-            ) {
-                HomeScreen(
-                    onNotificationsClick = {},
-                    onSettingsClick = {}
+            when (val state = uiState) {
+                MainActivityState.Loading -> Unit
+                is MainActivityState.Success -> MainActivityContent(
+                    userData = state.userData
                 )
             }
         }
+    }
+}
+
+@Composable
+fun MainActivityContent(
+    userData: UserData,
+) {
+    NewsLayerTheme(
+        darkTheme = shouldUseDarkTheme(userData)
+    ) {
+        NewsLayerNavigation(
+            startDestination = getStartDestination(userData)
+        )
     }
 }
 
@@ -90,11 +101,23 @@ fun shouldUseDarkTheme(
     state: MainActivityState
 ): Boolean = when (state) {
     MainActivityState.Loading -> false
-    is MainActivityState.Success -> when (state.userData.darkThemeConfig) {
-        DarkThemeConfig.FOLLOW_SYSTEM -> isSystemInDarkTheme()
-        DarkThemeConfig.DARK -> true
-        DarkThemeConfig.LIGHT -> false
-    }
+    is MainActivityState.Success -> shouldUseDarkTheme(state.userData)
+}
+
+@Composable
+fun shouldUseDarkTheme(
+    data: UserData
+): Boolean = when (data.darkThemeConfig) {
+    DarkThemeConfig.FOLLOW_SYSTEM -> isSystemInDarkTheme()
+    DarkThemeConfig.DARK -> true
+    DarkThemeConfig.LIGHT -> false
+}
+
+fun getStartDestination(
+    userData: UserData
+): Destination = when {
+    userData.shouldHideOnboarding -> Home
+    else -> OnBoarding
 }
 
 /**

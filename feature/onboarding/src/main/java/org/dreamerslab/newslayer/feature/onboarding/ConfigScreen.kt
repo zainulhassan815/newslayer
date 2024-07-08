@@ -72,7 +72,6 @@ import org.dreamerslab.newslayer.ui.theme.spacing
 @Composable
 fun ConfigScreen(
     onNavigateUp: () -> Unit,
-    onContinueClick: () -> Unit,
     viewModel: ConfigScreenViewModel,
     modifier: Modifier = Modifier,
 ) {
@@ -109,7 +108,9 @@ fun ConfigScreen(
             ) {
                 PrimaryButton(
                     label = "Continue",
-                    onClick = onContinueClick,
+                    onClick = {
+                        viewModel.setShouldHideOnboarding(state.canProceedFurther)
+                    },
                     enabled = state.canProceedFurther,
                     modifier = Modifier
                         .fillMaxWidth()

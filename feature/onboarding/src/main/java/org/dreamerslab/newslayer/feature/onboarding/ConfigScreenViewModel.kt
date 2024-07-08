@@ -1,6 +1,5 @@
 package org.dreamerslab.newslayer.feature.onboarding
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import arrow.core.getOrElse
@@ -9,7 +8,6 @@ import javax.inject.Inject
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import org.dreamerslab.newslayer.core.data.repository.NewsRepository
@@ -53,7 +51,6 @@ class ConfigScreenViewModel @Inject constructor(
                 }
             )
         }
-        .onEach { Log.v("ConfigScreenViewModel", it.userData.toString()) }
         .stateIn(
             scope = viewModelScope,
             started = SharingStarted.WhileSubscribed(5_000L),
@@ -75,6 +72,12 @@ class ConfigScreenViewModel @Inject constructor(
     fun setCategoryIdFollowed(id: String, followed: Boolean) {
         viewModelScope.launch {
             userDataRepository.setCategoryIdFollowed(id, followed)
+        }
+    }
+
+    fun setShouldHideOnboarding(shouldHide: Boolean) {
+        viewModelScope.launch {
+            userDataRepository.setShouldHideOnboarding(shouldHide)
         }
     }
 }

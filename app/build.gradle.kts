@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.newslayer.android.application)
     alias(libs.plugins.newslayer.android.application.compose)
+    kotlin("plugin.serialization")
 }
 
 android {
@@ -47,4 +48,7 @@ dependencies {
     implementation(libs.androidx.activity.compose)
 
     implementation(libs.androidx.core.splashscreen)
+
+    implementation(libs.androidx.navigation.compose)
+    implementation(libs.kotlinx.serialization.json)
 }
