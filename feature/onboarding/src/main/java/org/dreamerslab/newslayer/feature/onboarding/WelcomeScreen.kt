@@ -41,7 +41,7 @@ fun WelcomeScreen(
         modifier = modifier,
     ) { paddingValues ->
         Image(
-            painter = painterResource(R.drawable.background),
+            painter = painterResource(R.drawable.feature_onboarding_background),
             contentDescription = null,
             modifier = Modifier.fillMaxSize(),
             contentScale = ContentScale.Crop,
