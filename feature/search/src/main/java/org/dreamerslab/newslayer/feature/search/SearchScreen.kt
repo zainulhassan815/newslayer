@@ -84,11 +84,16 @@ fun SearchScreen(
                 ),
             )
 
-            SearchResultContent(
-                pagingItemsFlow = viewModel.pagingDataFlow,
-                currentQuery = { query },
-                onArticleClick = onArticleClick
-            )
+            val state by viewModel.state.collectAsStateWithLifecycle()
+
+            when (state) {
+                SearchScreenState.Initial -> Unit
+                is SearchScreenState.Data -> SearchResultContent(
+                    pagingItemsFlow = (state as SearchScreenState.Data).pagingDataFlow,
+                    currentQuery = { query },
+                    onArticleClick = onArticleClick
+                )
+            }
         }
     }
 }
