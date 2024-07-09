@@ -91,8 +91,7 @@ fun MainActivityContent(
         darkTheme = shouldUseDarkTheme(userData)
     ) {
         NewsLayerNavigation(
-            // startDestination = getStartDestination(userData)
-            startDestination = Search
+             startDestination = getStartDestination(userData)
         )
     }
 }
