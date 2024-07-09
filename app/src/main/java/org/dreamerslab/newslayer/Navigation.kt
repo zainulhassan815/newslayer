@@ -9,6 +9,7 @@ import androidx.navigation.compose.rememberNavController
 import kotlinx.serialization.Serializable
 import org.dreamerslab.newslayer.feature.home.HomeScreen
 import org.dreamerslab.newslayer.feature.onboarding.OnboardingScreen
+import org.dreamerslab.newslayer.feature.search.SearchScreen
 
 @Serializable
 sealed interface Destination
@@ -18,6 +19,9 @@ data object OnBoarding : Destination
 
 @Serializable
 data object Home : Destination
+
+@Serializable
+data object Search : Destination
 
 @Composable
 fun NewsLayerNavigation(
@@ -41,6 +45,14 @@ fun NewsLayerNavigation(
                 },
                 onSettingsClick = {
                     // TODO: Navigate to Settings
+                }
+            )
+        }
+
+        composable<Search> {
+            SearchScreen(
+                onArticleClick = {
+                    // TODO: Open ArticleDetails page
                 }
             )
         }

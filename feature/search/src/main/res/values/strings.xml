@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="feature_search_app_bar_title">Search</string>
+    <string name="feature_search_search_field_placeholder">Search for articles</string>
+    <string name="feature_search_search_field_cd_clear_search_icon">Clear search query</string>
+    <string name="feature_search_search_field_cd_search_icon">Search</string>
+    <string name="feature_search_search_result_error_title">Error Occurred</string>
+    <string name="feature_search_search_result_error_msg">We are having trouble connecting the server. Please make sure you have an active network connection and try again.</string>
+    <string name="feature_search_search_result_try_again_btn_lbl">Try Again</string>
+    <string name="feature_search_search_result_empty_result_error_title">Nothing Found</string>
+    <string name="feature_search_search_result_empty_result_error_msg">We could not find any news articles for the term \"%1$s\". Please try again.</string>
+    <string name="feature_search_articles_list_load_more_btn_label">Load More Articles</string>
+</resources>
