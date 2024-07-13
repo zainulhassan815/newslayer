@@ -3,6 +3,8 @@
 # NewsLayer
 Get a personalized feed with the stories you care about
 
+[Download APK File](./app/release/app-release.apk)
+
 
 ## Tech Stack
 - Kotlin
