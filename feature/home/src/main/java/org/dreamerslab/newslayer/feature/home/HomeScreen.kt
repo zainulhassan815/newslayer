@@ -33,12 +33,14 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import kotlinx.coroutines.launch
 import org.dreamerslab.newslayer.core.model.Category
+import org.dreamerslab.newslayer.core.model.NewsArticle
 import org.dreamerslab.newslayer.ui.theme.spacing
 
 @Composable
 fun HomeScreen(
     onNotificationsClick: () -> Unit,
     onSettingsClick: () -> Unit,
+    onArticleClick: (article: NewsArticle) -> Unit,
     modifier: Modifier = Modifier,
     viewModel: HomeScreenViewModel = hiltViewModel(),
 ) {
@@ -58,6 +60,7 @@ fun HomeScreen(
             HomeScreenState.Loading -> CircularProgressIndicator()
             is HomeScreenState.Success -> HomeScreenContent(
                 state = state,
+                onArticleClick = onArticleClick,
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(paddingValues)
@@ -106,6 +109,7 @@ fun HomeScreenAppBar(
 @Composable
 fun HomeScreenContent(
     state: HomeScreenState.Success,
+    onArticleClick: (article: NewsArticle) -> Unit,
     modifier: Modifier = Modifier
 ) {
     val forYouCategoryName = stringResource(R.string.feature_home_category_for_you)
@@ -141,7 +145,8 @@ fun HomeScreenContent(
                         factory.create(categories = data)
                     },
                     key = categories[page].name
-                )
+                ),
+                onArticleClick = onArticleClick
             )
         }
     }

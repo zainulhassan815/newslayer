@@ -55,6 +55,7 @@ private val dateFormat = DateTimeComponents.Format {
 @Composable
 fun CategoryList(
     viewModel: CategoryListViewModel,
+    onArticleClick: (article: NewsArticle) -> Unit,
     modifier: Modifier = Modifier
 ) {
     val pagingItems = viewModel.pagingData.collectAsLazyPagingItems()
@@ -95,7 +96,7 @@ fun CategoryList(
         else -> ArticlesListScaffold(
             modifier = modifier,
             pagingItems = pagingItems,
-            onArticleClick = {}
+            onArticleClick = onArticleClick
         )
     }
 }

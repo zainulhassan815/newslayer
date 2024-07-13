@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">News Layer</string>
+
+    <string name="navigation_bar_cd_icon_home">Home</string>
+    <string name="navigation_bar_cd_icon_search">Search</string>
+    <string name="navigation_bar_cd_icon_downloads">Downloads</string>
 </resources>
