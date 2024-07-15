@@ -20,19 +20,21 @@ Get a personalized feed with the stories you care about
 
 ### Onboarding Screen
 
-![OnBoarding Screen Flow](./graphics/onboarding_screen.gif)
+![Welcome Screen](./graphics/welcome_screen.jpeg)
+
+![Config Screen](./graphics/config_screen.jpeg)
 
 [feature/onboarding](./feature/onboarding/src/main/java/org/dreamerslab/newslayer/feature/onboarding)
 
 ### HomeScreen
 
-![HomeScreen Flow](./graphics/home_screen.gif)
+![Home Screen](./graphics/home.jpeg)
 
 [feature/home](./feature/home/src/main/java/org/dreamerslab/newslayer/feature/home)
 
 ### SearchScreen
 
-![Search Screen Flow](./graphics/search_screen.gif)
+![Search Screen](./graphics/search.jpeg)
 
 [feature/search](./feature/search/src/main/java/org/dreamerslab/newslayer/feature/search)
 
