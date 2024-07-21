@@ -12,5 +12,10 @@ interface NewsDataApi {
         @Query("q") searchQuery: String? = null,
         @Query("category", encoded = true) categories: String? = null,
         @Query("page") page: String? = null,
-    ): Either<CallError,NetworkResponseDto>
+    ): Either<CallError, NetworkResponseDto>
+
+    @GET("api/1/latest?language=en")
+    suspend fun getNewsArticlesByIds(
+        @Query("id", encoded = true) ids: String
+    ): Either<CallError, NetworkResponseDto>
 }

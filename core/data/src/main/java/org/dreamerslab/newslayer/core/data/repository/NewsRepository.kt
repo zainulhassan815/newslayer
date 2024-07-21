@@ -20,6 +20,10 @@ interface NewsRepository {
         query: NewsArticlesQuery = NewsArticlesQuery()
     ): Flow<Either<NewsRepositoryFailure, NewsArticlesPage>>
 
+    fun getNewsArticleById(
+        articleId: String
+    ): Flow<Either<NewsRepositoryFailure, NewsArticlesPage>>
+
 }
 
 sealed interface NewsRepositoryFailure {

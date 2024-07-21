@@ -1,12 +1,8 @@
 package org.dreamerslab.newslayer.core.data.model
 
-import kotlinx.datetime.Clock
-import kotlinx.datetime.Instant
-import kotlinx.datetime.format.DateTimeComponents
-import kotlinx.datetime.format.FormatStringsInDatetimeFormats
-import kotlinx.datetime.format.byUnicodePattern
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import org.dreamerslab.newslayer.core.data.api.ApiUtils
 import org.dreamerslab.newslayer.core.model.NewsArticle
 import org.dreamerslab.newslayer.core.model.NewsSource
 
@@ -23,17 +19,10 @@ data class NewsArticleDto(
     @SerialName("source_url") val sourceUrl: String,
     @SerialName("source_icon") val sourceIcon: String? = null,
 ) {
-    companion object {
-        @OptIn(FormatStringsInDatetimeFormats::class)
-        private val ApiDateTimeFormat = DateTimeComponents.Format {
-            byUnicodePattern("uuuu-MM-dd HH:mm:ss")
-        }
-    }
-
     fun toDomainNewsArticle(): NewsArticle = NewsArticle(
         id = id,
         title = title,
-        description = description ?: "",
+        description = description.orEmpty(),
         headerImageUrl = imageUrl,
         source = NewsSource(
             id = sourceId,
@@ -41,12 +30,6 @@ data class NewsArticleDto(
             icon = sourceIcon,
         ),
         link = link,
-        publishDate = parsePublishDate(publishDate)
+        publishDate = ApiUtils.parsePublishDate(publishDate)
     )
-
-    private fun parsePublishDate(dateTimeStr: String) = try {
-        Instant.parse(dateTimeStr, ApiDateTimeFormat)
-    } catch (e: Exception) {
-        Clock.System.now()
-    }
 }
