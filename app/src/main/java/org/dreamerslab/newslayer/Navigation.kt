@@ -5,15 +5,12 @@ import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.consumeWindowInsets
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.res.painterResource
@@ -75,20 +72,6 @@ fun NewsLayerNavigation(
             }
         }
 
-        composable<Downloads> {
-            NavigationBarWrapper(
-                controller = controller,
-                selected = Downloads
-            ) {
-                Box(
-                    modifier = Modifier.fillMaxSize(),
-                    contentAlignment = Alignment.Center
-                ) {
-                    Text(text = "Downloads")
-                }
-            }
-        }
-
         composable<ArticleDetails> {
             ArticleDetailsPage(
                 onNavigateUp = controller::navigateUp
@@ -113,11 +96,6 @@ private val topLevelDestinations = listOf(
         destination = Search,
         iconRes = CommonResources.drawable.common_resources_search,
         contentDescriptionRes = R.string.navigation_bar_cd_icon_search
-    ),
-    NavigationBarDestinationItem(
-        destination = Downloads,
-        iconRes = CommonResources.drawable.common_resources_download,
-        contentDescriptionRes = R.string.navigation_bar_cd_icon_downloads
     )
 )
 
