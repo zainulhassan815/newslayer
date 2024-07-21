@@ -14,7 +14,7 @@ interface NewsDataApi {
         @Query("page") page: String? = null,
     ): Either<CallError, NetworkResponseDto>
 
-    @GET("api/1/latest?language=en")
+    @GET("api/1/latest")
     suspend fun getNewsArticlesByIds(
         @Query("id", encoded = true) ids: String
     ): Either<CallError, NetworkResponseDto>

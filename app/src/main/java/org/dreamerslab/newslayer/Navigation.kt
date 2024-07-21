@@ -23,7 +23,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import androidx.navigation.toRoute
+import org.dreamerslab.newslayer.feature.articledetails.ArticleDetailsPage
 import org.dreamerslab.newslayer.feature.home.HomeScreen
 import org.dreamerslab.newslayer.feature.onboarding.OnboardingScreen
 import org.dreamerslab.newslayer.feature.search.SearchScreen
@@ -90,13 +90,9 @@ fun NewsLayerNavigation(
         }
 
         composable<ArticleDetails> {
-            val route = it.toRoute<ArticleDetails>()
-            Box(
-                modifier = Modifier.fillMaxSize(),
-                contentAlignment = Alignment.Center
-            ) {
-                Text(text = route.articleId)
-            }
+            ArticleDetailsPage(
+                onNavigateUp = controller::navigateUp
+            )
         }
     }
 }

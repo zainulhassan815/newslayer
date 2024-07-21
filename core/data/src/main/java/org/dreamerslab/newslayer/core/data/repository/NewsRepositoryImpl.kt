@@ -13,6 +13,7 @@ import kotlinx.coroutines.flow.flow
 import org.dreamerslab.newslayer.core.data.api.ApiUtils
 import org.dreamerslab.newslayer.core.data.api.NewsDataApi
 import org.dreamerslab.newslayer.core.model.Category
+import org.dreamerslab.newslayer.core.model.NewsArticle
 import org.dreamerslab.newslayer.core.model.NewsArticlesPage
 
 @Singleton
@@ -68,9 +69,11 @@ class NewsRepositoryImpl @Inject constructor(
 
     override fun getNewsArticleById(
         articleId: String
-    ): Flow<Either<NewsRepositoryFailure, NewsArticlesPage>> = flow {
+    ): Flow<Either<NewsRepositoryFailure, NewsArticle?>> = flow {
         newsDataApi.getNewsArticlesByIds(articleId)
-            .map { it.toResultPage(previousPage = null) }
+            .map {
+                it.toResultPage(previousPage = null).newsArticles.firstOrNull()
+            }
             .mapLeft {
                 it.toNewsRepositoryFailure()
             }.let { emit(it) }

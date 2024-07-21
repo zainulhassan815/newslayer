@@ -4,6 +4,7 @@ import arrow.core.Either
 import java.io.IOException
 import kotlinx.coroutines.flow.Flow
 import org.dreamerslab.newslayer.core.model.Category
+import org.dreamerslab.newslayer.core.model.NewsArticle
 import org.dreamerslab.newslayer.core.model.NewsArticlesPage
 
 data class NewsArticlesQuery(
@@ -22,7 +23,7 @@ interface NewsRepository {
 
     fun getNewsArticleById(
         articleId: String
-    ): Flow<Either<NewsRepositoryFailure, NewsArticlesPage>>
+    ): Flow<Either<NewsRepositoryFailure, NewsArticle?>>
 
 }
 

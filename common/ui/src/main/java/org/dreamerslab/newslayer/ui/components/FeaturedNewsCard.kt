@@ -13,6 +13,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -26,15 +27,14 @@ fun FeaturedNewsCard(
     title: String,
     source: String,
     date: String,
-    onClick: () -> Unit,
     modifier: Modifier = Modifier,
+    onClick: (() -> Unit)? = null,
     newsImageUrl: String? = null,
     sourceImageUrl: String? = null,
 ) {
+    val clickable = if (onClick != null) Modifier.clickable(onClick = onClick) else Modifier
     Column(
-        modifier = Modifier
-            .clickable(onClick = onClick)
-            .then(modifier),
+        modifier = clickable.then(modifier),
     ) {
         FeaturedImage(
             imageUrl = newsImageUrl,
@@ -91,6 +91,7 @@ private fun FeaturedImage(
                     .height(220.dp)
                     .clip(MaterialTheme.shapes.small)
                     .background(MaterialTheme.colorScheme.secondaryContainer),
+                contentScale = ContentScale.Crop,
             )
         }
 

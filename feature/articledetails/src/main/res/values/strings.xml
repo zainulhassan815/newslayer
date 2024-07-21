@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="feature_articledetails_cd_navigate_up_icon">Navigate Up</string>
+    <string name="feature_articledetails_invalid_id_error_title">Article Not Found</string>
+    <string name="feature_articledetails_invalid_id_error_msg">We could not find details about the selected article.</string>
+    <string name="feature_articledetails_error_title">Error Occurred</string>
+    <string name="feature_articledetails_error_msg">We could not fetch articles details at the moment. Please make sure you have an network connection and try again.</string>
+    <string name="feature_articledetails_retry_btn_label">Try Again</string>
+    <string name="feature_articledetails_read_full_article_btn_label">Read Full Article</string>
+</resources>
